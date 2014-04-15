@@ -1,0 +1,59 @@
+﻿@model   List<GraduatesProject.DAL.PersonsProffesion>
+
+
+@{
+    ViewBag.Title = "GetProffesions";
+}
+
+<h2>GetProffesions</h2>
+<table>
+    <tr>
+        <th>
+           Firts Name
+        </th>
+        <th>
+           Structure Name
+        </th>
+        <th>
+           Position Name
+        </th>
+        <th>
+          year
+        </th>
+        <th>
+           
+        </th>
+        <th>
+           
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Structure.StructureName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Position.PositionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit","PersonsProffesions", new { id=item.Id },null) |
+            @Html.ActionLink("Details", "Details","PersonsProffesions", new { id=item.Id },null) |
+            @Html.ActionLink("Delete", "Delete","PersonsProffesions", new { id=item.Id },null)
+        </td>
+    </tr>
+}
+</table>

@@ -1,0 +1,29 @@
+﻿@model GraduatesProject.DAL.Position
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Position</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PositionName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PositionName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RateInPercent)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RateInPercent)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

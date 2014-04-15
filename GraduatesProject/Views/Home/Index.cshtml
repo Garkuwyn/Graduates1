@@ -1,0 +1,61 @@
+﻿@model List<GraduatesProject.DAL.Person>
+
+@{
+    ViewBag.Title = "All students";
+}
+@Html.ActionLink("Add student","GetAddEditForm","Home")
+<h3>Сhoose student for details</h3>
+<table>
+    <thead>
+        <tr>
+            <th>First Name   
+            </th>
+            <th>Last Name
+            </th>
+            <th>Biography 
+            </th>
+            <th>GPA of certificate  
+            </th>
+            <th>Diploma Paper Topic
+            </th>
+            <th>Has Work Now
+            </th>
+            <th>Funded By NBU
+            </th>
+            <th>Actions
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            var hasWork = item.HasWorkNow;
+            var fundedByNBU = item.FundedByNBU;
+            <tr>
+                <td>
+                    @item.FirstName
+                </td>
+                <td>
+                    @item.LastName
+                </td>
+                <td>
+                    @item.Biography
+                </td>
+                <td>
+                    @item.GPAofCertificate
+                </td>
+                <td>
+                    @item.DiplomaPaperTopic
+                </td>
+                <td>
+                     @Html.CheckBox("HasWork",hasWork,new{@disabled="disabled"})
+                </td>
+                <td>
+                    @Html.CheckBox("FundedByNBU",fundedByNBU,new{@disabled="disabled"})
+                </td>
+                 <td>
+                     @Html.ActionLink("Edit","GetEditForm",new{item.Id})|
+                     @Html.ActionLink("Proffesions","GetProffesions",new{item.Id})
+                </td>
+        </tr>
+        }
+    </thead>
+</table>

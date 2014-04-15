@@ -1,0 +1,57 @@
+﻿@model GraduatesProject.DAL.PersonsProffesion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>PersonsProffesion</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Person.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Person.FirstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Structure.StructureName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Structure.StructureName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Position.PositionName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Position.PositionName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Year)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Year)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Adress)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Adress)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

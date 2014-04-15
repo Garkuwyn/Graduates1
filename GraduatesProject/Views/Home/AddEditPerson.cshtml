@@ -1,0 +1,76 @@
+﻿@model GraduatesProject.DAL.Person
+
+@using (Html.BeginForm("AddEditPerson", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.Id)
+    @Html.ValidationSummary()
+    <table>
+        <thead>
+            <tr>
+                <td>First Name:<br>
+                    @Html.EditorFor(a => a.FirstName)
+                </td>
+                <td>Last Name:<br>
+                    @Html.EditorFor(a => a.LastName)
+                </td>
+            </tr>
+            <tr>
+                <td>Group Name:<br>
+                    @Html.EditorFor(a => a.GroupName)
+                </td>
+                <td>Graduate Year:<br>
+                    @Html.EditorFor(a => a.GraduateYear)
+                </td>
+            </tr>
+            <tr>
+                <td>GPA of certificate:<br>
+                    @Html.EditorFor(a => a.GPAofCertificate)
+                </td>
+                <td>Diploma Paper topic:<br>
+                    @Html.EditorFor(a => a.DiplomaPaperTopic)
+                </td>
+            </tr>
+            <tr>
+                <td>Supervisor of diploma paper:<br>
+                    @Html.EditorFor(a => a.SupervisorOfDiplomaPaper)
+                </td>
+                <td>Email:<br>
+                    @Html.EditorFor(a => a.Email)
+                </td>
+            </tr>
+            <tr>
+                <td>Skype:<br>
+                    @Html.EditorFor(a => a.Skype)
+                </td>
+                <td>Funded by NBU:
+                    @Html.CheckBoxFor(a => a.FundedByNBU)
+                </td>
+            </tr>
+            <tr>
+                <td>Is Married:
+                    @Html.CheckBoxFor(a => a.IsMarried)
+                </td>
+                <td>Has work now:
+                    @Html.CheckBoxFor(a => a.HasWorkNow)
+                </td>
+            </tr>
+            <tr>
+                <td>Activity in students:<br>
+                    @Html.TextAreaFor(a => a.ActivityInStudent, 5, 5, null)
+                </td>
+                <td>Reviews about institute:<br>
+                    @Html.TextAreaFor(a => a.ReviewsAboutInstitute, 5, 5, null)
+                </td>
+            </tr>
+            <tr>
+                <td>Activity in students:<br>
+                    @Html.TextAreaFor(a => a.ActivityInStudent, 5, 5, null)
+                </td>
+                <td>Biography:<br>
+                    @Html.TextAreaFor(a => a.Biography, 5, 5, null)
+                </td>
+            </tr>
+        </thead>
+    </table>
+    <input type="submit" value="Submit" />
+}

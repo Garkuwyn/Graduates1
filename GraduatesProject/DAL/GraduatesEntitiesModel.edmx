@@ -1,0 +1,581 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GraduatesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="GraduatesModelStoreContainer">
+          <EntitySet Name="Groups" EntityType="GraduatesModel.Store.Groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Persons" EntityType="GraduatesModel.Store.Persons" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PersonsProffesions" EntityType="GraduatesModel.Store.PersonsProffesions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Photos" EntityType="GraduatesModel.Store.Photos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Positions" EntityType="GraduatesModel.Store.Positions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="GraduatesModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Structures" EntityType="GraduatesModel.Store.Structures" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="GraduatesModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SystemUsers" EntityType="GraduatesModel.Store.SystemUsers" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Persons_Groups" Association="GraduatesModel.Store.FK_Persons_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_Photos" Association="GraduatesModel.Store.FK_Persons_Photos">
+            <End Role="Photos" EntitySet="Photos" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonsProffesions_Persons" Association="GraduatesModel.Store.FK_PersonsProffesions_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="PersonsProffesions" EntitySet="PersonsProffesions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonsProffesions_Positions" Association="GraduatesModel.Store.FK_PersonsProffesions_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="PersonsProffesions" EntitySet="PersonsProffesions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonsProffesions_Structures" Association="GraduatesModel.Store.FK_PersonsProffesions_Structures">
+            <End Role="Structures" EntitySet="Structures" />
+            <End Role="PersonsProffesions" EntitySet="PersonsProffesions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemUsers_Roles" Association="GraduatesModel.Store.FK_SystemUsers_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Curator" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Biography" Type="nvarchar" MaxLength="100" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="GraduateYear" Type="int" />
+          <Property Name="GPAofCertificate" Type="float" />
+          <Property Name="DiplomaPaperTopic" Type="nvarchar" MaxLength="1000" />
+          <Property Name="SupervisorOfDiplomaPaper" Type="nvarchar" MaxLength="500" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" />
+          <Property Name="Skype" Type="nvarchar" MaxLength="500" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActivityInStudent" Type="nvarchar(max)" />
+          <Property Name="PhotoId" Type="int" />
+          <Property Name="HasWorkNow" Type="bit" Nullable="false" />
+          <Property Name="IsMarried" Type="bit" Nullable="false" />
+          <Property Name="ReviewsAboutInstitute" Type="nvarchar(max)" />
+          <Property Name="FundedByNBU" Type="bit" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PersonsProffesions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="StructureId" Type="int" Nullable="false" />
+          <Property Name="PositionId" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Guid" Type="nvarchar" MaxLength="500" />
+          <Property Name="VirtualUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsOnServer" Type="bit" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PositionName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RateInPercent" Type="decimal" Precision="2" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleSystemName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="RoleLabel" Type="nvarchar" Nullable="false" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="Structures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StructureName" Type="nvarchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="SystemUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_Persons_Groups">
+          <End Role="Groups" Type="GraduatesModel.Store.Groups" Multiplicity="1" />
+          <End Role="Persons" Type="GraduatesModel.Store.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persons_Photos">
+          <End Role="Photos" Type="GraduatesModel.Store.Photos" Multiplicity="0..1" />
+          <End Role="Persons" Type="GraduatesModel.Store.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonsProffesions_Persons">
+          <End Role="Persons" Type="GraduatesModel.Store.Persons" Multiplicity="1" />
+          <End Role="PersonsProffesions" Type="GraduatesModel.Store.PersonsProffesions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonsProffesions">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonsProffesions_Positions">
+          <End Role="Positions" Type="GraduatesModel.Store.Positions" Multiplicity="1" />
+          <End Role="PersonsProffesions" Type="GraduatesModel.Store.PersonsProffesions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonsProffesions">
+              <PropertyRef Name="PositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonsProffesions_Structures">
+          <End Role="Structures" Type="GraduatesModel.Store.Structures" Multiplicity="1" />
+          <End Role="PersonsProffesions" Type="GraduatesModel.Store.PersonsProffesions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Structures">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonsProffesions">
+              <PropertyRef Name="StructureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemUsers_Roles">
+          <End Role="Roles" Type="GraduatesModel.Store.Roles" Multiplicity="1" />
+          <End Role="SystemUsers" Type="GraduatesModel.Store.SystemUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemUsers">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GraduatesModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GraduatesEntityModel" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Groups" EntityType="GraduatesModel.Group" />
+          <EntitySet Name="Persons" EntityType="GraduatesModel.Person" />
+          <EntitySet Name="PersonsProffesions" EntityType="GraduatesModel.PersonsProffesion" />
+          <EntitySet Name="Photos" EntityType="GraduatesModel.Photo" />
+          <EntitySet Name="Positions" EntityType="GraduatesModel.Position" />
+          <EntitySet Name="Roles" EntityType="GraduatesModel.Role" />
+          <EntitySet Name="Structures" EntityType="GraduatesModel.Structure" />
+          <EntitySet Name="sysdiagrams" EntityType="GraduatesModel.sysdiagram" />
+          <EntitySet Name="SystemUsers" EntityType="GraduatesModel.SystemUser" />
+          <AssociationSet Name="FK_Persons_Groups" Association="GraduatesModel.FK_Persons_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_Photos" Association="GraduatesModel.FK_Persons_Photos">
+            <End Role="Photos" EntitySet="Photos" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonsProffesions_Persons" Association="GraduatesModel.FK_PersonsProffesions_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="PersonsProffesions" EntitySet="PersonsProffesions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonsProffesions_Positions" Association="GraduatesModel.FK_PersonsProffesions_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="PersonsProffesions" EntitySet="PersonsProffesions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonsProffesions_Structures" Association="GraduatesModel.FK_PersonsProffesions_Structures">
+            <End Role="Structures" EntitySet="Structures" />
+            <End Role="PersonsProffesions" EntitySet="PersonsProffesions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemUsers_Roles" Association="GraduatesModel.FK_SystemUsers_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Curator" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Persons" Relationship="GraduatesModel.FK_Persons_Groups" FromRole="Groups" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Biography" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="GraduateYear" Type="Int32" />
+          <Property Name="GPAofCertificate" Type="Double" />
+          <Property Name="DiplomaPaperTopic" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="SupervisorOfDiplomaPaper" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Skype" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ActivityInStudent" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PhotoId" Type="Int32" />
+          <Property Name="HasWorkNow" Type="Boolean" Nullable="false" />
+          <Property Name="IsMarried" Type="Boolean" Nullable="false" />
+          <Property Name="ReviewsAboutInstitute" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="FundedByNBU" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="GraduatesModel.FK_Persons_Groups" FromRole="Persons" ToRole="Groups" />
+          <NavigationProperty Name="Photo" Relationship="GraduatesModel.FK_Persons_Photos" FromRole="Persons" ToRole="Photos" />
+          <NavigationProperty Name="PersonsProffesions" Relationship="GraduatesModel.FK_PersonsProffesions_Persons" FromRole="Persons" ToRole="PersonsProffesions" />
+          <Property Type="String" Name="GroupName" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PersonsProffesion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="StructureId" Type="Int32" Nullable="false" />
+          <Property Name="PositionId" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Person" Relationship="GraduatesModel.FK_PersonsProffesions_Persons" FromRole="PersonsProffesions" ToRole="Persons" />
+          <NavigationProperty Name="Position" Relationship="GraduatesModel.FK_PersonsProffesions_Positions" FromRole="PersonsProffesions" ToRole="Positions" />
+          <NavigationProperty Name="Structure" Relationship="GraduatesModel.FK_PersonsProffesions_Structures" FromRole="PersonsProffesions" ToRole="Structures" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Guid" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="VirtualUrl" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsOnServer" Type="Boolean" />
+          <NavigationProperty Name="Persons" Relationship="GraduatesModel.FK_Persons_Photos" FromRole="Photos" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RateInPercent" Type="Decimal" Precision="2" Scale="0" />
+          <NavigationProperty Name="PersonsProffesions" Relationship="GraduatesModel.FK_PersonsProffesions_Positions" FromRole="Positions" ToRole="PersonsProffesions" />
+          <Property Type="String" Name="PositionName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleSystemName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RoleLabel" Type="String" Nullable="false" MaxLength="70" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="SystemUsers" Relationship="GraduatesModel.FK_SystemUsers_Roles" FromRole="Roles" ToRole="SystemUsers" />
+        </EntityType>
+        <EntityType Name="Structure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="PersonsProffesions" Relationship="GraduatesModel.FK_PersonsProffesions_Structures" FromRole="Structures" ToRole="PersonsProffesions" />
+          <Property Type="String" Name="StructureName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="SystemUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Role" Relationship="GraduatesModel.FK_SystemUsers_Roles" FromRole="SystemUsers" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_Persons_Groups">
+          <End Role="Groups" Type="GraduatesModel.Group" Multiplicity="1" />
+          <End Role="Persons" Type="GraduatesModel.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persons_Photos">
+          <End Role="Photos" Type="GraduatesModel.Photo" Multiplicity="0..1" />
+          <End Role="Persons" Type="GraduatesModel.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonsProffesions_Persons">
+          <End Role="Persons" Type="GraduatesModel.Person" Multiplicity="1" />
+          <End Role="PersonsProffesions" Type="GraduatesModel.PersonsProffesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonsProffesions">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonsProffesions_Positions">
+          <End Role="Positions" Type="GraduatesModel.Position" Multiplicity="1" />
+          <End Role="PersonsProffesions" Type="GraduatesModel.PersonsProffesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonsProffesions">
+              <PropertyRef Name="PositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonsProffesions_Structures">
+          <End Role="Structures" Type="GraduatesModel.Structure" Multiplicity="1" />
+          <End Role="PersonsProffesions" Type="GraduatesModel.PersonsProffesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Structures">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonsProffesions">
+              <PropertyRef Name="StructureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemUsers_Roles">
+          <End Role="Roles" Type="GraduatesModel.Role" Multiplicity="1" />
+          <End Role="SystemUsers" Type="GraduatesModel.SystemUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemUsers">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GraduatesModelStoreContainer" CdmEntityContainer="GraduatesEntityModel">
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="GraduatesModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Curator" ColumnName="Curator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="GraduatesModel.Person">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Biography" ColumnName="Biography" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="GraduateYear" ColumnName="GraduateYear" />
+                <ScalarProperty Name="GPAofCertificate" ColumnName="GPAofCertificate" />
+                <ScalarProperty Name="DiplomaPaperTopic" ColumnName="DiplomaPaperTopic" />
+                <ScalarProperty Name="SupervisorOfDiplomaPaper" ColumnName="SupervisorOfDiplomaPaper" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Skype" ColumnName="Skype" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ActivityInStudent" ColumnName="ActivityInStudent" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="HasWorkNow" ColumnName="HasWorkNow" />
+                <ScalarProperty Name="IsMarried" ColumnName="IsMarried" />
+                <ScalarProperty Name="ReviewsAboutInstitute" ColumnName="ReviewsAboutInstitute" />
+                <ScalarProperty Name="FundedByNBU" ColumnName="FundedByNBU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonsProffesions">
+            <EntityTypeMapping TypeName="GraduatesModel.PersonsProffesion">
+              <MappingFragment StoreEntitySet="PersonsProffesions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="StructureId" ColumnName="StructureId" />
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="GraduatesModel.Photo">
+              <MappingFragment StoreEntitySet="Photos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="VirtualUrl" ColumnName="VirtualUrl" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IsOnServer" ColumnName="IsOnServer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="GraduatesModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RateInPercent" ColumnName="RateInPercent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="GraduatesModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleSystemName" ColumnName="RoleSystemName" />
+                <ScalarProperty Name="RoleLabel" ColumnName="RoleLabel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Structures">
+            <EntityTypeMapping TypeName="GraduatesModel.Structure">
+              <MappingFragment StoreEntitySet="Structures">
+                <ScalarProperty Name="StructureName" ColumnName="StructureName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GraduatesModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemUsers">
+            <EntityTypeMapping TypeName="GraduatesModel.SystemUser">
+              <MappingFragment StoreEntitySet="SystemUsers">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
